@@ -1,14 +1,35 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { fetchCategories } from "@/app/lib/data";
 import { Button } from "@/components/ui/button";
-import { fetchCourses } from "@/app/lib/data";
 import Card from "@/app/components/Card";
 import clsx from "clsx";
-import { CourseCardProps } from "@/app/lib/definitions";
-import { Category } from "@/app/lib/definitions";
 
+// Local type definitions since backend was removed
+interface CourseCardProps {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  instructor: {
+    name: string;
+    imageUrl: string;
+  };
+  instructorId: string;
+  rating: number;
+  reviewCount: number;
+  enrollmentCount: number;
+  price: number;
+  category: string;
+  level: string;
+  duration: string;
+  chaptersCount: number;
+}
+
+interface Category {
+  id: string;
+  name: string;
+}
 
 export default function Browse() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -18,19 +39,10 @@ export default function Browse() {
   useEffect(() => {
     async function loadData() {
       try {
-        // Load categories
-        const categoryData = await fetchCategories();
-        const transformedCategories: Category[] = categoryData.map(row => ({
-          id: String(row.id),
-          name: String(row.name)
-        }));
-        setCategories(transformedCategories);
-        if (transformedCategories.length > 0) setActiveCategories([]);
-
-        // Load courses
-        const courseData = await fetchCourses();
-        console.log("Course Data:", courseData);
-        setCourses(courseData);
+        // Backend removed - use empty data
+        setCategories([]);
+        setActiveCategories([]);
+        setCourses([]);
       } catch (error) {
         console.error("Error loading data:", error);
       }

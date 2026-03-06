@@ -1,5 +1,21 @@
-import { CourseWithLessons } from "@/app/lib/definitions";
 import ChapterItem from "./ChapterItem";
+
+// Local type definition since backend was removed
+interface Lesson {
+  id: string;
+  title: string;
+  description: string;
+  videoUrl: string;
+  isLocked: boolean;
+  position: number;
+}
+
+interface CourseWithLessons {
+  id: string;
+  title: string;
+  description: string;
+  chapters: Lesson[];
+}
 
 interface CourseSidebarProps {
   course: CourseWithLessons;

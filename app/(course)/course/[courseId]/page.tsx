@@ -5,11 +5,59 @@ import { useParams } from "next/navigation";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import InstructorDialog from "@/components/InstructorDialog";
-import { Review, CourseData } from "@/app/lib/definitions";
 import Link from "next/link";
 import { ArrowRight, Star, ThumbsUp, MessageCircle, Send } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Skeleton } from "@/components/ui/skeleton";
+
+// Type definitions
+interface ReviewComment {
+  id: number;
+  user: {
+    name: string;
+    imageUrl: string;
+  };
+  text: string;
+}
+
+interface Review {
+  id: number;
+  user: {
+    name: string;
+    imageUrl: string;
+  };
+  rating: number;
+  comment: string;
+  timestamp: string;
+  likes: number;
+  comments: ReviewComment[];
+}
+
+interface Instructor {
+  id: string;
+  name: string;
+  imageUrl: string;
+}
+
+interface CourseData {
+  id?: string;
+  title: string;
+  description: string;
+  category: string;
+  instructorId: string;
+  instructor: Instructor;
+  enrolled: string;
+  chapters: string;
+  rating: string;
+  reviews: string;
+  level: string;
+  levelDescription: string;
+  schedule: string;
+  scheduleDetails: string;
+  pace: string;
+  imageUrl: string;
+  createdAt: string;
+}
 
 // Add type for API review data
 interface ApiReview {
@@ -54,66 +102,18 @@ const CourseDetailsPage = () => {
   const [loading, setLoading] = useState(true);
 
   const fetchReviews = useCallback(async () => {
-    try {
-      const res = await fetch(`/api/reviews?courseId=${courseId}`);
-      const data = await res.json();
-      if (data.success) {
-        setReviews(data.reviews.map((review: ApiReview) => ({
-          id: review.id,
-          user: {
-            name: review.user.name,
-            imageUrl: review.user.imageUrl || '/avatar.png',
-          },
-          rating: review.rating,
-          comment: review.comment,
-          timestamp: review.updatedAt,
-          likes: 0,
-          comments: [],
-        })));
-      }
-    } catch (error) {
-      console.error("Failed to fetch reviews:", error);
-    }
+    // Backend removed - return empty reviews
+    setReviews([]);
   }, [courseId]);
 
   useEffect(() => {
     const fetchCourse = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`/api/courses/${courseId}`);
-        const data = await res.json();
-
-        if (!res.ok || !data || typeof data !== 'object') {
-          setCourseData(fallbackCourse);
-          return;
-        }
-
-        const filledCourse: CourseData = {
-          title: data.title || fallbackCourse.title,
-          description: data.description || fallbackCourse.description,
-          category: data.category || fallbackCourse.category,
-          instructorId: data.instructorId || fallbackCourse.instructorId,
-          instructor: {
-            id: data.instructorId || fallbackCourse.instructorId,
-            name: data.instructor?.name || fallbackCourse.instructor.name,
-            imageUrl: data.instructor?.imageUrl || fallbackCourse.instructor.imageUrl,
-          },
-          enrolled: data.enrolled || fallbackCourse.enrolled,
-          chapters: data.chapters || fallbackCourse.chapters,
-          rating: data.rating || fallbackCourse.rating,
-          reviews: data.reviews || fallbackCourse.reviews,
-          level: data.level || fallbackCourse.level,
-          levelDescription: data.levelDescription || fallbackCourse.levelDescription,
-          schedule: data.schedule || fallbackCourse.schedule,
-          scheduleDetails: data.scheduleDetails || fallbackCourse.scheduleDetails,
-          pace: data.pace || fallbackCourse.pace,
-          imageUrl: data.imageUrl || fallbackCourse.imageUrl,
-          createdAt: data.createdAt || fallbackCourse.createdAt,
-        };
-
-        setCourseData(filledCourse);
+        // Backend removed - use fallback course data
+        setCourseData(fallbackCourse);
       } catch (error) {
-        console.error("Failed to fetch course data:", error);
+        console.error("Backend removed - using fallback data");
         setCourseData(fallbackCourse);
       } finally {
         setLoading(false);

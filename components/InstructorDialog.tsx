@@ -8,8 +8,27 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { InstructorDetails } from "@/app/lib/data";
 import InstructorDialogContent from "./InstructorDialogContent";
+
+// Local type definition since backend was removed
+interface InstructorDetails {
+  id: string;
+  name: string;
+  email: string;
+  imageUrl: string;
+  bio?: string;
+  coursesCount: number;
+  studentsCount: number;
+  rating: number;
+  totalRevenue: number;
+  courses: Array<{
+    id: string;
+    title: string;
+    price: number;
+    enrolled: number;
+    rating: number;
+  }>;
+}
 
 interface InstructorDialogProps {
   instructorId: string;

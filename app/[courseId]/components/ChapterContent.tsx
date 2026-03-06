@@ -2,8 +2,6 @@
 
 import { useUserStore } from "@/app/stores/useUserStore";
 import { useEffect, useState } from "react";
-import { checkUserEnrolled } from "@/app/lib/data";
-import { toggleChapterProgress, getChapterProgress } from "@/app/lib/actions/chapterProgressActions";
 import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";

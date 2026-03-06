@@ -10,7 +10,31 @@ import {
   Image as PDFImage,
 } from "@react-pdf/renderer";
 import { useState, useEffect } from "react";
-import { CourseData } from "@/app/lib/definitions";
+
+// Local type definition since backend was removed
+interface CourseData {
+  id?: string;
+  title: string;
+  description: string;
+  category: string;
+  instructorId: string;
+  instructor: {
+    id: string;
+    name: string;
+    imageUrl: string;
+  };
+  enrolled: string;
+  chapters: string;
+  rating: string;
+  reviews: string;
+  level: string;
+  levelDescription: string;
+  schedule: string;
+  scheduleDetails: string;
+  pace: string;
+  imageUrl: string;
+  createdAt: string;
+}
 
 const styles = StyleSheet.create({
   page: {

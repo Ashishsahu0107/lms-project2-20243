@@ -5,10 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "prisma generate && next build",
+    "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "postinstall": "prisma generate"
+    "lint": "next lint"
   },
   "dependencies": {
     "@ant-design/icons": "^6.0.0",
@@ -72,6 +71,7 @@
     "eslint-config-next": "15.2.2",
     "prisma": "^6.6.0",
     "prisma-erd-generator": "^2.0.4",
+    "rimraf": "^5.0.0",
     "tailwindcss": "^4",
     "typescript": "^5.8.3"
   }

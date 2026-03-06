@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 // Component UI Table
 import DataTable from "./data-table";
-import { CourseTableData } from "@/app/lib/definitions";
 // Form để nhập khoá học mới?
 import CreateCourseForm from "./ui/form";
 // Cấu hình các cột cho DataTable
@@ -18,6 +17,17 @@ import {
 } from "@/components/ui/dialog";
 import { useUserStore } from "@/app/stores/useUserStore";
 import { toast } from "react-hot-toast";
+
+// Local type definition since backend was removed
+interface CourseTableData {
+  id: string;
+  title: string;
+  price: number;
+  status: string;
+  enrolled: number;
+  rating: number;
+  createdAt: string;
+}
 
 interface CourseTableProps {
     fetchData: CourseTableData[];

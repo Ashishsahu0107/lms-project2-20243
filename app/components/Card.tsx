@@ -4,9 +4,28 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { formatPrice } from "@/lib/utils";
-import { CourseCardProps } from "../lib/definitions";
-
 import InstructorDialog from "@/components/InstructorDialog";
+
+// Local type definition since backend was removed
+interface CourseCardProps {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  instructor: {
+    name: string;
+    imageUrl: string;
+  };
+  instructorId: string;
+  rating: number;
+  reviewCount: number;
+  enrollmentCount: number;
+  price: number;
+  category: string;
+  level: string;
+  duration: string;
+  chaptersCount: number;
+}
 
 const Card: React.FC<CourseCardProps> = ({
   id,

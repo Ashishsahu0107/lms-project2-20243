@@ -8,16 +8,9 @@ export const useUserStore = create<UserStore>((set) => ({
     setUser: (user) => set({ user }),
 
     fetchUser: async (id: string) => {
-        set({ isLoading: true })
-        try {
-            const res = await fetch(`/api/user/${id}`)
-            const data = await res.json();
-            set({ user: data });
-        } catch (error) {
-            console.log("Failed to fetch user:", error);
-        } finally {
-            set({ isLoading: false })
-        }
+        // Backend removed - no-op function
+        console.log("Backend removed - user fetching disabled");
+        set({ isLoading: false });
     }
 }))
 //---------Phần trên mỗi khi load lại trang sẽ không fetch lại, sẽ bị mất hết dữ liệu và hiển thị mặc định

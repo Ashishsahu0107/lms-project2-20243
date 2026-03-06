@@ -1,10 +1,19 @@
 "use client"
 
 import CourseTable from "./_components/coursesTable"
-import { CourseTableData } from "@/app/lib/definitions"
-import { getCoursesByInstructor } from "@/app/lib/data"
 import { useUserStore } from "@/app/stores/useUserStore"
 import { useEffect, useState } from "react"
+
+// Local type definition since backend was removed
+interface CourseTableData {
+  id: string;
+  title: string;
+  price: number;
+  status: string;
+  enrolled: number;
+  rating: number;
+  createdAt: string;
+}
 
 export default function TableCoursePage() {
     const [courses, setCourses] = useState<CourseTableData[]>([])
@@ -14,8 +23,8 @@ export default function TableCoursePage() {
     useEffect(() => {
         const fetchCourses = async () => {
             if (user?.id) {
-                const data = await getCoursesByInstructor(user.id);
-                setCourses(data)
+                // Backend removed - return empty courses list
+                setCourses([]);
             }
         }
         fetchCourses()

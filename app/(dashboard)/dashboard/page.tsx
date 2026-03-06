@@ -1,13 +1,27 @@
 "use client";
 
-import { getInitUserCourseCards } from "@/app/lib/data";
 import UserCourseCard from "../_components/UserCourseCard";
 import { Clock, CircleCheckBig, BookOpenIcon, CircleChevronRight } from "lucide-react";
 import { useUserStore } from "@/app/stores/useUserStore";
 import { useState, useEffect } from "react";
-import { UserCourseCardProps } from "@/app/lib/definitions";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+
+// Local type definition since backend was removed
+interface UserCourseCardProps {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  chaptersCount: number;
+  completedChaptersCount: number;
+  progress: number;
+  instructor: {
+    name: string;
+    imageUrl: string;
+  };
+  lastAccessedAt: string;
+}
 
 
 export default function DashboardPage() {
@@ -28,8 +42,8 @@ export default function DashboardPage() {
     }
     const fetchData = async () => {
       setIsLoading(true)
-      const data = await getInitUserCourseCards(user.id);
-      setUserCourseCards(data);
+      // Backend removed - return empty course list
+      setUserCourseCards([]);
       setIsLoading(false)
     }
     fetchData()

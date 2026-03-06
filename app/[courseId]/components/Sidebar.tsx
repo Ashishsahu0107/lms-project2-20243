@@ -7,7 +7,6 @@ import clsx from "clsx";
 import { useState, useEffect } from "react";
 import { useUserStore } from "@/app/stores/useUserStore";
 import { useProgressStore } from "@/app/stores/useProgressStore";
-import { checkUserEnrolled } from "@/app/lib/data";
 import { toast } from "react-hot-toast"
 
 interface SidebarProps {

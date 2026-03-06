@@ -1,7 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
-import { InstructorDetails } from "@/app/lib/data";
 import { formatPrice } from "@/lib/utils";
+
+// Local type definition since backend was removed
+interface InstructorDetails {
+  id: string;
+  name: string;
+  email: string;
+  imageUrl: string;
+  bio?: string;
+  coursesCount: number;
+  studentsCount: number;
+  rating: number;
+  totalRevenue: number;
+  courses: Array<{
+    id: string;
+    title: string;
+    price: number;
+    enrolled: number;
+    rating: number;
+  }>;
+}
 
 interface InstructorDialogContentProps {
   instructorDetails: InstructorDetails | null;

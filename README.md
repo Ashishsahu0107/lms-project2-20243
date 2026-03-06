@@ -75,3 +75,49 @@ The LMS is designed for **two main user groups**:
 4. npx prisma generate
 5. npm run dev (or pnpm dev)
 ```
+
+### ✅ Environment variables
+
+The project relies on several secrets and configuration values. Copy `.env.example` to `.env.local` and fill in the real values before running the app:
+
+```bash
+cp .env.example .env.local
+# then open .env.local and paste your keys
+```
+
+### 🛠 Windows build issues
+
+On Windows, Prisma sometimes leaves a temporary `query_engine-*.node.tmp` file
+locked, which makes `npm run build` fail with an EPERM rename error. To reduce
+this pain we added two safeguards:
+
+* a helper script (`scripts/clean-prisma.js`) that tries to delete any stale
+  engine files and even remove the entire `.prisma/client` folder.
+* the `prebuild` script now falls back to `rimraf` if the Node script itself
+  fails.
+
+If you still encounter a permission error, try these additional steps:
+
+```bash
+# close any running Next.js/Node processes (e.g. stop `npm run dev`)
+# close editors that might be holding a handle on the file
+node ./scripts/clean-prisma.js
+# or use rimraf directly:
+npx rimraf node_modules/.prisma/client
+npm run build
+```
+
+Restarting the machine or logging out often clears the lock as well.
+
+Required variables:
+
+| Name | Description |
+|------|-------------|
+| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Clerk publishable key (client) |
+| `CLERK_SECRET_KEY` | Clerk secret key (server) |
+| `CLERK_WEBHOOK_SECRET` | Clerk webhook signing secret |
+| `POSTGRES_URL` | PostgreSQL connection string |
+| `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` | Cloudinary upload credentials |
+| `VNPAY_TMN_CODE`, `VNPAY_SECRET_KEY` | VNPay sandbox/production keys |
+
+Missing any of these will cause runtime errors (500s) as the server attempts to use them. The code now validates required env vars at startup and gives a clear message if one is absent.

@@ -1,10 +1,28 @@
 "use client";
 import { useState } from "react";
 import Card from "./Card";
-import { CourseCardProps } from "@/app/lib/definitions";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import { useEffect } from "react";
+
+// Local type definition since backend was removed
+interface CourseCardProps {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  instructor: {
+    name: string;
+    imageUrl: string;
+  };
+  rating: number;
+  reviewCount: number;
+  enrollmentCount: number;
+  price: number;
+  category: string;
+  level: string;
+  duration: string;
+}
 
 interface CardListProps {
     courses: CourseCardProps[];

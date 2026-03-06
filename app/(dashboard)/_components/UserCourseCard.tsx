@@ -1,13 +1,29 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { UserCourseCardProps } from "../../lib/definitions";
 import { CircleCheckBig } from "lucide-react";
 import { Progress as ProgressShadCN } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import InstructorDialog from "@/components/InstructorDialog";
 import ReviewDialog from "@/app/components/ReviewDialog";
 import { useUserStore } from "@/app/stores/useUserStore";
+
+// Local type definition since backend was removed
+interface UserCourseCardProps {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  chaptersCount: number;
+  completedChaptersCount: number;
+  progress: number;
+  instructor: {
+    name: string;
+    imageUrl: string;
+  };
+  instructorId: string;
+  lastAccessedAt: string;
+}
 
 const UserCourseCard: React.FC<UserCourseCardProps> = ({
     id,

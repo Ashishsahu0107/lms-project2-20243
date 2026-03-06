@@ -16,7 +16,16 @@ import {
 
 import { Input } from "@/components/ui/input"
 
-import { CourseTableData } from "@/app/lib/definitions";
+// Local type definition since backend was removed
+interface CourseTableData {
+  id: string;
+  title: string;
+  price: number;
+  status: string;
+  enrolled: number;
+  rating: number;
+  createdAt: string;
+}
 import { useEffect } from "react"
 
 const formSchema = z.object({

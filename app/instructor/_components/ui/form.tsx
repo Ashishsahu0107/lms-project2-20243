@@ -23,8 +23,16 @@ import {
     SelectValue
 } from "@/components/ui/select"
 
-import { CourseTableData } from "@/app/lib/definitions";
-
+// Local type definition since backend was removed
+interface CourseTableData {
+  id: string;
+  title: string;
+  price: number;
+  status: string;
+  enrolled: number;
+  rating: number;
+  createdAt: string;
+}
 
 interface FormData {
     id?: string;

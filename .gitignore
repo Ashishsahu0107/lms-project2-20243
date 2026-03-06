@@ -46,3 +46,5 @@ zustand.md
 clerk.md
 
 .dockerignore
+# clerk configuration (can include secrets)
+/.clerk/

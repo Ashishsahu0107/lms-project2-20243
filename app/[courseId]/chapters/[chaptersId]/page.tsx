@@ -1,4 +1,3 @@
-import { fetchCourseById } from "@/app/lib/data";
 import { redirect } from "next/navigation";
 import { type NextPage } from "next";
 import ChapterContent from "../../components/ChapterContent";
@@ -12,7 +11,9 @@ const ChapterPage: NextPage<ChapterPageProps> = async ({ params }) => {
   try {
     const resolvedParams = await params;
     const { courseId, chaptersId: chapterId } = resolvedParams;
-    const course = await fetchCourseById(courseId);
+
+    // Backend removed - always allow access
+    const course = { id: courseId };
 
     if (!course) {
       console.log("Course not found");
